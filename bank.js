@@ -1,8 +1,8 @@
 // Require fs
 const fs = require('fs')
 
-let action = process.argv[2]
-let value = process.argv[3]
+const action = process.argv[2]
+const value = process.argv[3]
 
 // TRANSACTIONS EXECUTION ===================================
 
@@ -32,9 +32,26 @@ switch(action) {
 function total() {
     fs.readFile('bank.txt', 'utf8', function(err, data) {
         if (err) throw err;
+        data = data.split(',')
+        let result = 0
+        for (i=0; i < data.length; i++) {
+            if(parseFloat(data[i])) {
+                result += parseFloat(data[i])
+            }
+        }
+        console.log('Your balance is: ' + result)
     })
 }
+
 // DEPOSIT <number> - add positive amount to balance
+function deposit() {
+    fs.appendFile('bank.txt', ', ' + value, 'utf8', (err) => {
+        if (err) throw err
+        console.log('Deposit added!')
+    })
+    total()
+}
+
 
 // WITHDRAW <number> - add negative amount to balance
 
