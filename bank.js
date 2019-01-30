@@ -62,7 +62,24 @@ function withdraw() {
 }
 
 // LOTTO - subtract 5 from amount, if random number is hit add back larger number
-
+function lotto() {
+    fs.appendFile('bank.txt', ', -' + '5', 'utf8', (err) => {
+        if (err) throw err
+        // Make a random number
+        let randNum = Math.floor((Math.random() * 9) + 1)
+        // Evaluate whether the random number is equal to 7
+        if (randNum === 7) {
+            fs.appendFile('bank.txt', ', ' + '100', 'utf8', (err) => {
+                if (err) throw err
+                console.log('You win!  Have some money!')
+                total()
+            })
+        } else {
+            console.log('Sorry, you lose.  Better luck next time..')
+            total()
+        }
+    })
+}
 // Append all transactions to bank.txt file
 
 
@@ -70,7 +87,7 @@ function withdraw() {
 
 // IF TIME PERMITS======================
 
-// Add a way to always display total after a transaction
+// Add a way to always display total after a transaction - Call total() function after transaction
 
 // Warning if user withdraws more money than is in the account
 
