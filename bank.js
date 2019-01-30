@@ -52,12 +52,18 @@ function deposit() {
     total()
 }
 
-
 // WITHDRAW <number> - add negative amount to balance
+function withdraw() {
+    fs.appendFile('bank.txt', ', -' + value, 'utf8', (err) => {
+        if (err) throw err
+        console.log('Withdrawal made!')
+    })
+    total()
+}
 
 // LOTTO - subtract 5 from amount, if random number is hit add back larger number
 
-// Append all transatctions to bank.txt file
+// Append all transactions to bank.txt file
 
 
 
